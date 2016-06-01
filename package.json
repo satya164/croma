@@ -1,0 +1,57 @@
+{
+  "name": "croma",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Manage your colors",
+  "main": "index.android.js",
+  "dependencies": {
+    "pigment": "0.0.5",
+    "react": "^15.1.0",
+    "react-native": "^0.27.0-rc2",
+    "react-native-vector-icons": "^2.0.3",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0"
+  },
+  "devDependencies": {
+    "ava": "^0.15.1",
+    "babel-core": "^6.9.1",
+    "babel-eslint": "^6.0.4",
+    "babel-polyfill": "^6.9.1",
+    "babel-preset-react-native": "^1.9.0",
+    "cz-conventional-changelog": "^1.1.6",
+    "eslint": "^2.11.1",
+    "eslint-plugin-ava": "^2.4.0",
+    "eslint-plugin-babel": "^3.2.0",
+    "eslint-plugin-import": "^1.8.1",
+    "eslint-plugin-react": "^5.1.1",
+    "eslint-plugin-react-native": "^1.1.0-beta",
+    "flow-bin": "^0.25.0"
+  },
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "ava",
+    "flow": "flow",
+    "lint": "eslint .",
+    "flow:added": "git diff HEAD --cached --name-only --diff-filter=ACM | grep '.js$' > /dev/null || exit 0 && npm run flow",
+    "lint:added": "git diff HEAD --cached --name-only --diff-filter=ACM | grep '.js$' | xargs eslint"
+  },
+  "ava": {
+    "files": [
+      "**/*.test.js"
+    ],
+    "require": [
+      "babel-register",
+      "babel-polyfill"
+    ],
+    "babel": "inherit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
