@@ -2,19 +2,25 @@
 
 import React, { Component } from 'react';
 import {
+  View,
   ListView,
   StyleSheet,
 } from 'react-native';
 import ColorCard from './ColorCard';
+import FloatingActionButton from './FloatingActionButton';
 import * as Colors from '../constants/Colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  list: {
+    flex: 1,
     backgroundColor: Colors.lightGrey,
   },
   content: {
     paddingVertical: 4,
+    paddingBottom: 88,
   },
 });
 
@@ -23,6 +29,7 @@ type Props = {
   colors: Array<{
     color: string;
   }>;
+  showAddColor: Function;
   deleteColor: Function;
   goToColor: Function;
 }
@@ -56,6 +63,10 @@ export default class ColorList extends Component<void, Props, State> {
     this.props.deleteColor(this.props.palette, color);
   };
 
+  _handleShowAddColor = () => {
+    this.props.showAddColor(this.props.palette);
+  };
+
   _renderRow = (color: { color: string }) => {
     return (
       <ColorCard
@@ -69,13 +80,16 @@ export default class ColorList extends Component<void, Props, State> {
 
   render() {
     return (
-      <ListView
-        {...this.props}
-        style={styles.container}
-        contentContainerStyle={styles.content}
-        dataSource={this.state.dataSource}
-        renderRow={this._renderRow}
-      />
+      <View style={styles.container}>
+        <ListView
+          {...this.props}
+          style={styles.list}
+          contentContainerStyle={styles.content}
+          dataSource={this.state.dataSource}
+          renderRow={this._renderRow}
+        />
+        <FloatingActionButton icon='add' onPress={this._handleShowAddColor} />
+      </View>
     );
   }
 }

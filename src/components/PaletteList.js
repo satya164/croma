@@ -2,19 +2,25 @@
 
 import React, { Component } from 'react';
 import {
+  View,
   ListView,
   StyleSheet,
 } from 'react-native';
 import PaletteCard from './PaletteCard';
+import FloatingActionButton from './FloatingActionButton';
 import * as Colors from '../constants/Colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  list: {
+    flex: 1,
     backgroundColor: Colors.lightGrey,
   },
   content: {
     paddingVertical: 4,
+    paddingBottom: 88,
   },
 });
 
@@ -28,6 +34,7 @@ type Props = {
   palettes: Array<Palette>;
   goToPalette: Function;
   deletePalette: Function;
+  showAddPalette: Function;
 }
 
 type State = {
@@ -68,13 +75,16 @@ export default class PaletteList extends Component<void, Props, State> {
 
   render() {
     return (
-      <ListView
-        {...this.props}
-        style={styles.container}
-        contentContainerStyle={styles.content}
-        dataSource={this.state.dataSource}
-        renderRow={this._renderRow}
-      />
+      <View style={styles.container}>
+        <ListView
+          {...this.props}
+          style={styles.list}
+          contentContainerStyle={styles.content}
+          dataSource={this.state.dataSource}
+          renderRow={this._renderRow}
+        />
+        <FloatingActionButton icon='add' onPress={this.props.showAddPalette} />
+      </View>
     );
   }
 }

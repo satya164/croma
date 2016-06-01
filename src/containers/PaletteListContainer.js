@@ -3,7 +3,7 @@
 import { connect } from 'react-redux';
 import PaletteList from '../components/PaletteList';
 import { push } from '../actions/NavigationActions';
-import { deletePalette } from '../actions/PaletteActions';
+import { showAddPalette, deletePalette } from '../actions/PaletteActions';
 
 function mapStateToProps(state) {
   return {
@@ -22,6 +22,7 @@ function mapDispatchToProps(dispatch) {
       },
     })),
     deletePalette: (id) => dispatch(deletePalette(id)),
+    showAddPalette: () => dispatch(showAddPalette()),
   };
 }
 

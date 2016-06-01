@@ -3,7 +3,7 @@
 import { connect } from 'react-redux';
 import ColorList from '../components/ColorList';
 import { push, pop } from '../actions/NavigationActions';
-import { deleteColor } from '../actions/PaletteActions';
+import { showAddColor, deleteColor } from '../actions/PaletteActions';
 
 function getColors(palettes, id) {
   const palette = palettes.filter(p => p.id === id)[0];
@@ -32,6 +32,7 @@ function mapDispatchToProps(dispatch) {
       },
     })),
     deleteColor: (palette, color) => dispatch(deleteColor(palette, color)),
+    showAddColor: (palette) => dispatch(showAddColor(palette)),
   };
 }
 

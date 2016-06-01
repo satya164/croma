@@ -1,6 +1,10 @@
 /* @flow */
 
-import { DELETE_PALETTE, DELETE_COLOR } from '../constants/ActionTypes';
+import {
+  ADD_PALETTE,
+  DELETE_PALETTE,
+  DELETE_COLOR,
+} from '../constants/ActionTypes';
 
 type Palette = {
   id: number;
@@ -11,20 +15,36 @@ type Palette = {
 
 type Action = {
   type: string;
-  payload?: {
-    id?: string;
-    palette?: number;
-    color?: string;
-  };
+  payload?: any;
 }
 
 type PaletteState = Array<Palette>
 
 export default (currentState : PaletteState = [], action: Action) => {
   switch (action.type) {
+  case ADD_PALETTE:
+    if (action.payload && action.payload.id && action.payload.name && action.payload.colors) {
+      const {
+        id,
+        name,
+        createTime,
+        colors,
+      } = action.payload;
+      let i = createTime;
+      return [ {
+        id,
+        createTime,
+        name,
+        colors: colors.map(c => ({
+          color: c,
+          createTime: i++,
+        })),
+      } ].concat(currentState);
+    }
+    return currentState;
   case DELETE_PALETTE:
     if (action.payload && action.payload.id) {
-      const id = action.payload.id;
+      const { id } = action.payload;
       return currentState.filter(palette => palette.id !== id);
     }
     return currentState;

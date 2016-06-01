@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "ciox9em5v0000cm1241pda12r",
     "name": "Garden",
     "createTime": 1437422905586,
     "colors": [
@@ -31,7 +31,7 @@
     ]
   },
   {
-    "id": 2,
+    "id": "ciox9em5y0001cm123jc7jqo8",
     "name": "Vintage",
     "createTime": 1437422915974,
     "colors": [
@@ -62,9 +62,9 @@
     ]
   },
   {
-    "id": 3,
+    "id": "ciox9em5y0002cm12vawhmtyc",
     "name": "Sunflower",
-    "time": 1437422919260,
+    "createTime": 1437422919260,
     "colors": [
       {
         "color": "#debd51",
@@ -93,9 +93,9 @@
     ]
   },
   {
-    "id": 4,
+    "id": "ciox9em5y0003cm125qejk5jp",
     "name": "Leaves",
-    "time": 1437422922411,
+    "createTime": 1437422922411,
     "colors": [
       {
         "color": "#bcdc68",
@@ -124,9 +124,9 @@
     ]
   },
   {
-    "id": 5,
+    "id": "ciox9em5y0004cm12ruhqlvlk",
     "name": "Numix",
-    "time": 1437423724164,
+    "createTime": 1437423724164,
     "colors": [
       {
         "color": "#f1544d",

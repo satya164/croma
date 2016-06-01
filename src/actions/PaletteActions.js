@@ -1,9 +1,35 @@
 /* @flow */
 
-import { DELETE_PALETTE, DELETE_COLOR } from '../constants/ActionTypes';
+import uuid from 'node-uuid';
+
+import {
+  SHOW_ADD_PALETTE,
+  SHOW_ADD_COLOR,
+  ADD_PALETTE,
+  DELETE_PALETTE,
+  DELETE_COLOR,
+} from '../constants/ActionTypes';
 
 type Action = {
   type: string
+}
+
+export function showAddPalette(): Action {
+  return {
+    type: SHOW_ADD_PALETTE,
+  };
+}
+
+export function addPalette(name: string, colors: Array<string>): Action {
+  return {
+    type: ADD_PALETTE,
+    payload: {
+      id: uuid.v1(),
+      name,
+      colors,
+      createTime: Date.now(),
+    },
+  };
 }
 
 export function deletePalette(id: number): Action {
@@ -11,6 +37,15 @@ export function deletePalette(id: number): Action {
     type: DELETE_PALETTE,
     payload: {
       id,
+    },
+  };
+}
+
+export function showAddColor(palette: number): Action {
+  return {
+    type: SHOW_ADD_COLOR,
+    payload: {
+      palette,
     },
   };
 }
