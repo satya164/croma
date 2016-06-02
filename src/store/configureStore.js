@@ -1,8 +1,42 @@
 /* @flow */
-/* eslint-disable import/no-commonjs */
 
-if (process.env.NODE_ENV !== 'production') {
-  module.exports = require('./configureStore.dev');
+import { createStore, applyMiddleware, compose } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import rootReducer from '../reducers';
+import sagas from '../sagas';
+
+const sagaMiddleware = createSagaMiddleware();
+
+const enhancers = [];
+
+if (process.env.NODE_ENV === 'production') {
+  enhancers.push(
+    applyMiddleware(sagaMiddleware),
+  );
 } else {
-  module.exports = require('./configureStore.prod');
+  const devTools = require('remote-redux-devtools');
+
+  enhancers.push(
+    applyMiddleware(sagaMiddleware),
+    devTools(),
+  );
+}
+
+const enhancer = compose(
+  ...enhancers
+);
+
+export default function configureStore(initialState: ?any) {
+  const store = createStore(rootReducer, initialState, enhancer);
+
+  if (module.hot) {
+    module.hot.accept(() => {
+      const nextRootReducer = require('../reducers/index').default;
+      store.replaceReducer(nextRootReducer);
+    });
+  }
+
+  sagas.forEach(saga => sagaMiddleware.run(saga));
+
+  return store;
 }

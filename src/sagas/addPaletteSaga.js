@@ -2,26 +2,26 @@
 
 import { takeEvery } from 'redux-saga';
 import { put } from 'redux-saga/effects';
-import { NativeModules } from 'react-native';
 import { addPalette } from '../actions/PaletteActions';
-
-const {
-  ImageChooserModule,
-  ColorExtractorModule,
-} = NativeModules;
+import ImageChooser from '../modules/ImageChooser';
+import ColorExtractor from '../modules/ColorExtractor';
 
 function *showAddPalette() {
   try {
-    const data = yield ImageChooserModule.pickImageWithCamera();
-    const colors = yield ColorExtractorModule.extractColors(data.uri, 6);
+    const data = yield ImageChooser.pickImageWithCamera();
+    /* $FlowFixMe */
+    const colors = yield ColorExtractor.extractColors(data.uri, 6);
 
-    yield put(addPalette(data.name, colors));
+    if (data && data.name && colors) {
+      yield put(addPalette(data.name, colors));
+    } else {
+      yield put({ type: 'ADD_PALETTE_FAILED' });
+    }
   } catch (e) {
-    console.error(e);
     yield put({ type: 'ADD_PALETTE_FAILED', message: e.message });
   }
 }
 
-export default function *showAddPaletteSaga() {
+export default function *showAddPaletteSaga(): Generator<void, void, void> {
   yield* takeEvery('SHOW_ADD_PALETTE', showAddPalette);
 }

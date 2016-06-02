@@ -2,6 +2,8 @@
 
 import addPaletteSaga from './addPaletteSaga';
 
-export default [
+const sagas: Array<Function> = [
   addPaletteSaga,
 ];
+
+export default sagas;
