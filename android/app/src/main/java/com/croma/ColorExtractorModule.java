@@ -1,8 +1,6 @@
 package com.croma;
 
 
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -24,10 +22,6 @@ import me.croma.image.Image;
 import me.croma.image.KMeansColorPicker;
 
 public class ColorExtractorModule extends ReactContextBaseJavaModule {
-
-    private static final String ERR_ACTIVITY_DOES_NOT_EXIST = "Activity doesn't exist";
-
-    private static final String ERR_ACTIVITY_DOES_NOT_EXIST_CODE = "ERR_ACTIVITY_DOES_NOT_EXIST";
 
     public ColorExtractorModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -52,58 +46,9 @@ public class ColorExtractorModule extends ReactContextBaseJavaModule {
         return k.getUsefulColors(b, count);
     }
 
-    public void extractColorsFromBitmap(final Bitmap bitmap, final int count, final Promise promise) {
-        final Activity currentActivity = getCurrentActivity();
-
-        if (currentActivity == null) {
-            promise.reject(ERR_ACTIVITY_DOES_NOT_EXIST_CODE, ERR_ACTIVITY_DOES_NOT_EXIST);
-            return;
-        }
-
-        final ProgressDialog progress = ProgressDialog.show(
-                currentActivity, null, "Please wait...", true);
-
-        // Process the image in a new thread
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    final List<Color> colors = getColorList(bitmap, count);
-
-                    WritableArray data = Arguments.createArray();
-
-                    for (int i = 0; i < colors.size(); i++) {
-                        data.pushString(colors.get(i).toHexString());
-                    }
-
-                    promise.resolve(data);
-                } catch (Exception e) {
-                    promise.reject(e);
-                } finally {
-                    currentActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            progress.dismiss();
-                        }
-                    });
-                }
-            }
-        }).start();
-    }
 
     @ReactMethod
     public void extractColors(final String uri, final int count, final Promise promise) {
-        final Activity currentActivity = getCurrentActivity();
-
-        if (currentActivity == null) {
-            promise.reject(ERR_ACTIVITY_DOES_NOT_EXIST_CODE, ERR_ACTIVITY_DOES_NOT_EXIST);
-            return;
-        }
-
-        final ProgressDialog progress = ProgressDialog.show(
-                currentActivity, null, "Processing image...", true);
-
-        // Process the image in a new thread
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -120,13 +65,6 @@ public class ColorExtractorModule extends ReactContextBaseJavaModule {
                     promise.resolve(data);
                 } catch (Exception e) {
                     promise.reject(e);
-                } finally {
-                    currentActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            progress.dismiss();
-                        }
-                    });
                 }
             }
         }).start();
