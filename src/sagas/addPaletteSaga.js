@@ -5,6 +5,10 @@ import { put } from 'redux-saga/effects';
 import { addPalette } from '../actions/PaletteActions';
 import ImageChooser from '../modules/ImageChooser';
 import ColorExtractor from '../modules/ColorExtractor';
+import {
+  SHOW_ADD_PALETTE,
+  ADD_PALETTE_FAILED,
+} from '../constants/ActionTypes';
 
 function *showAddPalette() {
   try {
@@ -15,13 +19,13 @@ function *showAddPalette() {
     if (data && data.name && colors) {
       yield put(addPalette(data.name, colors));
     } else {
-      yield put({ type: 'ADD_PALETTE_FAILED' });
+      yield put({ type: ADD_PALETTE_FAILED });
     }
   } catch (e) {
-    yield put({ type: 'ADD_PALETTE_FAILED', message: e.message });
+    yield put({ type: ADD_PALETTE_FAILED, message: e.message });
   }
 }
 
 export default function *addPaletteSaga(): Generator<void, void, void> {
-  yield* takeEvery('SHOW_ADD_PALETTE', showAddPalette);
+  yield* takeEvery(SHOW_ADD_PALETTE, showAddPalette);
 }
