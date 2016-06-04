@@ -1,6 +1,7 @@
 /* @flow */
 
 import {
+  LOAD_SAVED_DATA,
   ADD_PALETTE,
   DELETE_PALETTE,
   DELETE_COLOR,
@@ -22,6 +23,11 @@ type PaletteState = Array<Palette>
 
 export default (currentState : PaletteState = [], action: Action): PaletteState => {
   switch (action.type) {
+  case LOAD_SAVED_DATA:
+    if (action.payload && action.payload.palettes) {
+      return action.payload.palettes;
+    }
+    return currentState;
   case ADD_PALETTE:
     if (action.payload && action.payload.id && action.payload.name && action.payload.colors) {
       const {

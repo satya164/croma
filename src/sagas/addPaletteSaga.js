@@ -22,6 +22,6 @@ function *showAddPalette() {
   }
 }
 
-export default function *showAddPaletteSaga(): Generator<void, void, void> {
+export default function *addPaletteSaga(): Generator<void, void, void> {
   yield* takeEvery('SHOW_ADD_PALETTE', showAddPalette);
 }

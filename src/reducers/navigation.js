@@ -1,6 +1,10 @@
 /* @flow */
 
-import { PUSH_ROUTE, POP_ROUTE } from '../constants/ActionTypes';
+import {
+  LOAD_SAVED_DATA,
+  PUSH_ROUTE,
+  POP_ROUTE,
+} from '../constants/ActionTypes';
 
 const initialState = {
   index: 0,
@@ -38,6 +42,11 @@ export default (currentState : NavigationState = initialState, action: Action): 
   } = currentState;
 
   switch (action.type) {
+  case LOAD_SAVED_DATA:
+    if (action.payload && action.payload.navigation) {
+      return action.payload.navigation;
+    }
+    return currentState;
   case PUSH_ROUTE:
     if (action.payload) {
       return {
