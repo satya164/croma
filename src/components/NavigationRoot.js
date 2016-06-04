@@ -7,14 +7,7 @@ import Scene from './Scene';
 const {
   NavigationExperimental,
   BackAndroid,
-  StyleSheet,
 } = ReactNative;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 const {
   CardStack: NavigationCardStack,
@@ -43,7 +36,7 @@ type Props = {
   };
 }
 
-export default class Croma extends Component<void, Props, void> {
+export default class NavigationRoot extends Component<void, Props, void> {
   componentDidMount() {
     BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction);
   }
@@ -84,7 +77,6 @@ export default class Croma extends Component<void, Props, void> {
         navigationState={this.props.navigation}
         onNavigate={this._handleNavigate}
         renderScene={this._renderScene}
-        style={styles.container}
       />
     );
   }

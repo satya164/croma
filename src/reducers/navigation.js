@@ -1,15 +1,6 @@
 /* @flow */
 
-import ReactNative from 'react-native';
 import { PUSH_ROUTE, POP_ROUTE } from '../constants/ActionTypes';
-
-const {
-  NavigationExperimental,
-} = ReactNative;
-
-const {
-  StateUtils: NavigationStateUtils,
-} = NavigationExperimental;
 
 const initialState = {
   index: 0,
@@ -23,29 +14,53 @@ const initialState = {
   ],
 };
 
+type Route = {
+  key: string;
+  name: string;
+  title: string;
+}
+
 type NavigationState = {
   index: number;
   key: string;
-  children: Array<{
-    key: string;
-    name: string;
-    title: string;
-  }>;
+  children: Array<Route>;
 }
 
 type Action = {
   type: string;
-  payload?: Object;
+  payload?: Route;
 }
 
-export default (currentState : NavigationState = initialState, action: Action) => {
+export default (currentState : NavigationState = initialState, action: Action): NavigationState => {
+  const {
+    index,
+    children,
+  } = currentState;
+
   switch (action.type) {
   case PUSH_ROUTE:
-    return NavigationStateUtils.push(currentState, action.payload);
+    if (action.payload) {
+      return {
+        ...currentState,
+        children: [
+          ...children,
+          action.payload,
+        ],
+        index: index + 1,
+      };
+    } else {
+      return currentState;
+    }
   case POP_ROUTE:
-    return currentState.index > 0 ?
-        NavigationStateUtils.pop(currentState) :
-        currentState;
+    if (index > 0) {
+      return {
+        ...currentState,
+        children: children.slice(0, children.length - 1),
+        index: index - 1,
+      };
+    } else {
+      return currentState;
+    }
   default:
     return currentState;
   }

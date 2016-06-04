@@ -20,7 +20,7 @@ type Action = {
 
 type PaletteState = Array<Palette>
 
-export default (currentState : PaletteState = [], action: Action) => {
+export default (currentState : PaletteState = [], action: Action): PaletteState => {
   switch (action.type) {
   case ADD_PALETTE:
     if (action.payload && action.payload.id && action.payload.name && action.payload.colors) {

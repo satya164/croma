@@ -2,12 +2,12 @@
 
 import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
-import NavigationContainer from './NavigationContainer';
+import NavigationRootContainer from './NavigationRootContainer';
 
 const RootContainer = (props: Object) => {
   return (
     <Provider store={props.store}>
-      <NavigationContainer />
+      <NavigationRootContainer />
     </Provider>
   );
 };
