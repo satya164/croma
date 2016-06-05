@@ -12,14 +12,14 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableArray;
 
+import org.numixproject.colorextractor.image.Color;
+import org.numixproject.colorextractor.image.Image;
+import org.numixproject.colorextractor.image.KMeansColorPicker;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-
-import me.croma.image.Color;
-import me.croma.image.Image;
-import me.croma.image.KMeansColorPicker;
 
 public class ColorExtractorModule extends ReactContextBaseJavaModule {
 
