@@ -28,10 +28,14 @@ const styles = StyleSheet.create({
     color: Colors.white,
   },
   title: {
+    flex: 1,
     color: Colors.white,
     fontWeight: 'bold',
     fontSize: 18,
     margin: 16,
+  },
+  right: {
+    width: 56,
   },
   content: {
     flex: 1,
@@ -80,9 +84,10 @@ export default class Scene extends Component<void, Props, void> {
               null
             }
             {routeDesc.title ?
-              <Text style={styles.title}>{routeDesc.title}</Text> :
+              <Text numberOfLines={1} style={styles.title}>{routeDesc.title}</Text> :
               null
             }
+            <View style={styles.right} />
           </View> :
           null
         }
