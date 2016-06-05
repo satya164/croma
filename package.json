@@ -6,7 +6,7 @@
   "main": "index.android.js",
   "dependencies": {
     "node-uuid": "^1.4.7",
-    "pigment": "0.0.5",
+    "pigment": "0.0.6",
     "react": "^15.1.0",
     "react-native": "^0.27.0-rc2",
     "react-native-vector-icons": "^2.0.3",

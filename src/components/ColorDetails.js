@@ -83,7 +83,7 @@ export default class ColorDetails extends Component<void, Props, State> {
       { key: 'HSV', value: c.tohsv() },
       { key: 'HWB', value: c.tohwb() },
       { key: 'CMYK', value: c.tocmyk() },
-      { key: 'LAB', value: `lab(${c.lab[0].toFixed(2)}, ${c.lab[1].toFixed(2)}, ${c.lab[2].toFixed(2)})` },
+      { key: 'CIELAB', value: c.tolab() },
       { key: 'Luminance', value: (c.luminance() * 100).toFixed(2) + '%' },
       { key: 'Darkness', value: (c.darkness() * 100).toFixed(2) + '%' },
     ];
@@ -104,6 +104,7 @@ export default class ColorDetails extends Component<void, Props, State> {
   render() {
     const c = new Color(this.props.color);
     const hex = c.tohex();
+    const name = c.toname();
     const isDark = c.darkness() > 0.4;
 
     return (
@@ -120,7 +121,9 @@ export default class ColorDetails extends Component<void, Props, State> {
                 />
               </View>
             </TouchableNativeFeedback>
-            <Text style={[ styles.title, isDark ? { color: white } : { color: black, opacity: 0.7 } ]}>{hex.toUpperCase()}</Text>
+            <Text style={[ styles.title, isDark ? { color: white } : { color: black, opacity: 0.7 } ]}>
+              {name ? `${name.charAt(0).toUpperCase() + name.substr(1).toLowerCase()} (${hex.toUpperCase()})` : hex.toUpperCase()}
+            </Text>
           </View>
           {this._getItems(c).map(item =>
             <TouchableNativeFeedback key={item.key} onPress={() => this._copyToClipboard(item.value)}>
