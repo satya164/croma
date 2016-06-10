@@ -23,7 +23,7 @@ type Route = {
 type SceneRendererProps = {
   scene: {
     index: number;
-    navigationState: Route;
+    route: Route;
   };
 }
 
@@ -32,7 +32,7 @@ type Props = {
   popRoute: Function;
   navigation: {
     index: number;
-    children: Array<Route>;
+    routes: Array<Route>;
   };
 }
 

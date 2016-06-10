@@ -9,7 +9,7 @@ import {
 const initialState = {
   index: 0,
   key: 'root',
-  children: [
+  routes: [
     {
       key: 'palettes',
       name: 'palettes',
@@ -27,7 +27,7 @@ type Route = {
 type NavigationState = {
   index: number;
   key: string;
-  children: Array<Route>;
+  routes: Array<Route>;
 }
 
 type Action = {
@@ -38,7 +38,7 @@ type Action = {
 export default (currentState : NavigationState = initialState, action: Action): NavigationState => {
   const {
     index,
-    children,
+    routes,
   } = currentState;
 
   switch (action.type) {
@@ -51,8 +51,8 @@ export default (currentState : NavigationState = initialState, action: Action): 
     if (action.payload) {
       return {
         ...currentState,
-        children: [
-          ...children,
+        routes: [
+          ...routes,
           action.payload,
         ],
         index: index + 1,
@@ -64,7 +64,7 @@ export default (currentState : NavigationState = initialState, action: Action): 
     if (index > 0) {
       return {
         ...currentState,
-        children: children.slice(0, children.length - 1),
+        routes: routes.slice(0, routes.length - 1),
         index: index - 1,
       };
     } else {

@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 type Props = {
   scene: {
     index: number;
-    navigationState: {
+    route: {
       name: string;
       title: string;
       appbar?: boolean;
@@ -60,10 +60,10 @@ export default class Scene extends Component<void, Props, void> {
   render() {
     const {
       index,
-      navigationState,
+      route,
     } = this.props.scene;
 
-    const routeDesc = routeMapper(navigationState);
+    const routeDesc = routeMapper(route);
     const SceneChild = routeDesc.component;
 
     return (
@@ -92,7 +92,7 @@ export default class Scene extends Component<void, Props, void> {
           null
         }
         <View style={styles.content}>
-          <SceneChild {...navigationState.props} />
+          <SceneChild {...route.props} />
         </View>
       </View>
     );
