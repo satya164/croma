@@ -1,6 +1,6 @@
 /* @flow */
 
-import uuid from 'node-uuid';
+import uuid from 'uuid';
 
 import {
   SHOW_ADD_PALETTE,

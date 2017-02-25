@@ -79,6 +79,7 @@ export default class PaletteList extends Component<void, Props, State> {
         <ListView
           {...this.props}
           style={styles.list}
+          enableEmptySections={false}
           contentContainerStyle={styles.content}
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}

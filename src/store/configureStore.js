@@ -14,11 +14,8 @@ if (process.env.NODE_ENV === 'production') {
     applyMiddleware(sagaMiddleware),
   );
 } else {
-  const devTools = require('remote-redux-devtools');
-
   enhancers.push(
     applyMiddleware(sagaMiddleware),
-    devTools(),
   );
 }
 

@@ -5,15 +5,15 @@
   "description": "Manage your colors",
   "main": "index.android.js",
   "dependencies": {
-    "node-uuid": "^1.4.7",
-    "pigment": "0.0.6",
-    "react": "^15.1.0",
-    "react-native": "^0.28.0-rc.0",
+    "pigment": "^0.1.0",
+    "react": "^15.4.2",
+    "react-native": "^0.41.2",
     "react-native-vector-icons": "^2.0.3",
     "react-redux": "^4.4.5",
-    "redux": "^3.5.2",
+    "redux": "^3.6.0",
     "redux-saga": "^0.10.4",
-    "remote-redux-devtools": "^0.3.3"
+    "saga": "^0.0.1",
+    "uuid": "^3.0.1"
   },
   "devDependencies": {
     "ava": "^0.15.1",
