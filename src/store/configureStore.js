@@ -5,6 +5,8 @@ import createSagaMiddleware from 'redux-saga';
 import rootReducer from '../reducers';
 import rootSaga from '../sagas';
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const sagaMiddleware = createSagaMiddleware();
 
 const enhancers = [];
@@ -19,7 +21,7 @@ if (process.env.NODE_ENV === 'production') {
   );
 }
 
-const enhancer = compose(
+const enhancer = composeEnhancers(
   ...enhancers
 );
 
