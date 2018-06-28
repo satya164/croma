@@ -1,7 +1,7 @@
-/* @flow */
+/* @flow strict */
 
 import type { Reducers } from '../reducers';
 
-type $ExtractFunctionReturn = <V>(v: (...args: any) => V) => V;
+type $ExtractFunctionReturn = <V>(v: (...args: *) => V) => V;
 
-export type State = $ObjMap<Reducers, $ExtractFunctionReturn>;
+export type State = $Exact<$ObjMap<Reducers, $ExtractFunctionReturn>>;

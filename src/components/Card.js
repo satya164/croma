@@ -1,12 +1,13 @@
-/* @flow */
+/* @flow strict */
 
 import * as React from 'react';
 import { StyleSheet, Animated } from 'react-native';
 import * as Colors from '../constants/Colors';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 type Props = {
-  style?: any,
   children: React.Node,
+  style?: ViewStyleProp,
 };
 
 export default class Card extends React.Component<Props> {

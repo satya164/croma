@@ -1,3 +1,3 @@
-/* @flow */
+/* @flow strict */
 
 import './src/index';

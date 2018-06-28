@@ -1,10 +1,8 @@
-/* @flow */
-
-export type PushAction<T, U> = (routeName: T, params: U) => void;
+/* @flow strict */
 
 export type PaletteListParams = void;
 
-export type ColorListParams = {| id: number, name: string |};
+export type ColorListParams = {| id: string, name: string |};
 
 export type ColorDetailsParams = {| color: string |};
 
@@ -16,7 +14,7 @@ export type NavigationProp<T> = {|
       | ['ColorDetails', ColorDetailsParams]
   ) => void,
   goBack: () => void,
-  state: {
+  state: {|
     params: T,
-  },
+  |},
 |};

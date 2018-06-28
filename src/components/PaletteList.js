@@ -1,22 +1,17 @@
-/* @flow */
+/* @flow strict */
 
 import * as React from 'react';
 import { View, ListView, StyleSheet } from 'react-native';
 import PaletteCard from './PaletteCard';
 import FloatingActionButton from './FloatingActionButton';
 import * as Colors from '../constants/Colors';
+import type { Palette } from '../types/Palette';
 import type { NavigationProp, PaletteListParams } from '../types/Navigation';
-
-type Palette = {
-  id: number,
-  name: string,
-  colors: Array<Object>,
-};
 
 type Props = {
   navigation: NavigationProp<PaletteListParams>,
   palettes: Array<Palette>,
-  deletePalette: (id: number) => mixed,
+  deletePalette: (id: string) => mixed,
   showAddPalette: () => mixed,
 };
 

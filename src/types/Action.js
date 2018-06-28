@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow strict */
 
 type ShowAddPalette = {|
   type: 'SHOW_ADD_PALETTE',
@@ -17,13 +17,13 @@ type AddPalette = {|
     id: string,
     name: string,
     colors: string[],
-    createTime: number,
+    createdAt: number,
   |},
 |};
 
 type AddPaletteError = {|
   type: 'ADD_PALETTE_ERROR',
-  error: string,
+  message: string,
 |};
 
 type EditPalette = {|
@@ -46,6 +46,7 @@ type AddColor = {|
 
 type AddColorError = {|
   type: 'ADD_COLOR_ERROR',
+  message: string,
 |};
 
 type EditColor = {|

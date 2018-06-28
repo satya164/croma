@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow strict */
 
 import type { Store as ReduxStore, Dispatch as ReduxDispatch } from 'redux';
 import type { Action } from './Action';

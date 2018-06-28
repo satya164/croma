@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow strict */
 
 import * as React from 'react';
 import { StyleSheet, TouchableNativeFeedback, View, Text } from 'react-native';
@@ -10,8 +10,8 @@ type Props = {
   color: {
     color: string,
   },
-  onPress: Function,
-  deleteColor: Function,
+  onPress: () => mixed,
+  deleteColor: (color: string) => mixed,
 };
 
 export default class ColorCard extends React.Component<Props> {

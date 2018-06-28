@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow strict */
 
 import { createStackNavigator } from 'react-navigation';
 import PaletteListContainer from '../containers/PaletteListContainer';

@@ -1,19 +1,16 @@
-/* @flow */
+/* @flow strict */
 
 import * as React from 'react';
 import { StyleSheet, TouchableNativeFeedback, View, Text } from 'react-native';
 import Card from './Card';
 import CardAction from './CardAction';
 import * as Colors from '../constants/Colors';
+import type { Palette } from '../types/Palette';
 
 type Props = {
-  palette: {
-    id: number,
-    name: string,
-    colors: Array<Object>,
-  },
-  deletePalette: Function,
-  onPress: Function,
+  palette: Palette,
+  deletePalette: (id: string) => mixed,
+  onPress: () => mixed,
 };
 
 export default class PaletteCard extends React.Component<Props> {

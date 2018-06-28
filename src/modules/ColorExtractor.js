@@ -1,5 +1,5 @@
-/* @flow */
+/* @flow strict */
 
-export default class ImageChooser {
-  static extractColors: () => Promise<Array<string>>;
+export default class ColorExtractor {
+  static extractColors: (path: string, count: number) => Promise<Array<string>>;
 }

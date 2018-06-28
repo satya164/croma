@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow strict */
 
 import uuid from 'uuid';
 import ImageChooser from '../modules/ImageChooser';
@@ -13,13 +13,15 @@ export function showAddPalette() {
 
     try {
       const data = await ImageChooser.pickImageWithCamera();
-      /* $FlowFixMe */
       const colors = await ColorExtractor.extractColors(data.uri, 6);
 
-      if (data && data.name && colors) {
+      if (data && data.name) {
         dispatch(addPalette(data.name, colors));
       } else {
-        dispatch({ type: 'ADD_PALETTE_ERROR' });
+        dispatch({
+          type: 'ADD_PALETTE_ERROR',
+          message: `Invalid data: ${JSON.stringify(data)}`,
+        });
       }
     } catch (e) {
       dispatch({ type: 'ADD_PALETTE_ERROR', message: e.message });
@@ -34,7 +36,7 @@ export function addPalette(name: string, colors: Array<string>): Action {
       id: uuid.v4(),
       name,
       colors,
-      createTime: Date.now(),
+      createdAt: Date.now(),
     },
   };
 }

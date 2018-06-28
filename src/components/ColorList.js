@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow strict */
 
 import * as React from 'react';
 import { View, ListView, StyleSheet } from 'react-native';
@@ -13,8 +13,8 @@ type Props = {
   colors: Array<{
     color: string,
   }>,
-  showAddColor: Function,
-  deleteColor: Function,
+  showAddColor: (palette: string) => mixed,
+  deleteColor: (palette: string, color: string) => mixed,
 };
 
 type State = {

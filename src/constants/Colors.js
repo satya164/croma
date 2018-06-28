@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow strict */
 
 export const primary = '#f1544d';
 export const primaryDark = '#c94740';

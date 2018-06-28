@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow strict */
 
 import * as React from 'react';
 import {
@@ -34,7 +34,7 @@ export default class ColorDetails extends React.Component<Props, State> {
     copied: false,
   };
 
-  _copyTimeout: ?any;
+  _copyTimeout: TimeoutID;
 
   _getItems = (c: Color) => {
     return [

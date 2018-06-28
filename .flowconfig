@@ -40,12 +40,21 @@
 .*/node_modules/prettier/.*
 .*/node_modules/eslint.*
 
+[untyped]
+.*/node_modules/redux-persist/.*
+
 [include]
 
 [libs]
 node_modules/react-native/Libraries/react-native/react-native-interface.js
 node_modules/react-native/flow-github
 node_modules/react-native/flow
+
+[strict]
+unclear-type
+untyped-type-import
+unsafe-getters-setters
+sketchy-null
 
 [options]
 emoji=true
