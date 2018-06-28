@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   TouchableHighlight,
@@ -36,10 +36,6 @@ type Props = {
 }
 
 export default class FloatingActionButton extends Component<void, Props, void> {
-  static propTypes = {
-    icon: PropTypes.string.isRequired,
-  };
-
   render() {
     return (
       <TouchableHighlight {...this.props} style={styles.container}>

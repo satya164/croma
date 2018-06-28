@@ -6,14 +6,13 @@
   "main": "index.android.js",
   "dependencies": {
     "pigment": "^0.1.0",
-    "react": "^15.4.2",
-    "react-native": "^0.41.2",
-    "react-native-vector-icons": "^2.0.3",
+    "react": "~16.3.1",
+    "react-native": "~0.55.4",
+    "react-native-vector-icons": "^4.6.0",
     "react-redux": "^4.4.5",
     "redux": "^3.6.0",
     "redux-logger": "^2.8.2",
     "redux-saga": "^0.10.4",
-    "saga": "^0.0.1",
     "uuid": "^3.0.1"
   },
   "devDependencies": {
