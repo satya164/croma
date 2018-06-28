@@ -5,15 +5,6 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Colors from '../constants/Colors';
 
-const styles = StyleSheet.create({
-  icon: {
-    margin: 14,
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: Colors.grey,
-  },
-});
-
 type Props = {
   name: string,
 };
@@ -27,3 +18,12 @@ export default class CardAction extends React.Component<Props> {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  icon: {
+    margin: 14,
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: Colors.grey,
+  },
+});

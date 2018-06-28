@@ -13,44 +13,6 @@ import Color from 'pigment/full';
 import { white, grey, darkGrey } from '../constants/Colors';
 import type { NavigationProp, ColorDetailsParams } from '../types/Navigation';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: white,
-  },
-  color: {
-    height: 160,
-    justifyContent: 'space-between',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: 'rgba(0, 0, 0, .04)',
-  },
-  info: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 16,
-  },
-  key: {
-    fontSize: 12,
-    fontWeight: 'bold',
-    color: grey,
-  },
-  value: {
-    color: darkGrey,
-  },
-  snackbar: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: darkGrey,
-  },
-  hint: {
-    color: white,
-    margin: 16,
-  },
-});
-
 type Props = {
   navigation: NavigationProp<ColorDetailsParams>,
 };
@@ -132,3 +94,41 @@ export default class ColorDetails extends React.Component<Props, State> {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: white,
+  },
+  color: {
+    height: 160,
+    justifyContent: 'space-between',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: 'rgba(0, 0, 0, .04)',
+  },
+  info: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 16,
+  },
+  key: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: grey,
+  },
+  value: {
+    color: darkGrey,
+  },
+  snackbar: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: darkGrey,
+  },
+  hint: {
+    color: white,
+    margin: 16,
+  },
+});

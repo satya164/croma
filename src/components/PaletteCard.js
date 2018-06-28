@@ -6,26 +6,6 @@ import Card from './Card';
 import CardAction from './CardAction';
 import * as Colors from '../constants/Colors';
 
-const styles = StyleSheet.create({
-  palette: {
-    alignItems: 'stretch',
-    flexDirection: 'row',
-    height: 100,
-  },
-  color: {
-    flex: 1,
-  },
-  bottom: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  label: {
-    flex: 1,
-    marginHorizontal: 16,
-    color: Colors.darkGrey,
-  },
-});
-
 type Props = {
   palette: {
     id: number,
@@ -67,3 +47,23 @@ export default class PaletteCard extends React.Component<Props> {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  palette: {
+    alignItems: 'stretch',
+    flexDirection: 'row',
+    height: 100,
+  },
+  color: {
+    flex: 1,
+  },
+  bottom: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  label: {
+    flex: 1,
+    marginHorizontal: 16,
+    color: Colors.darkGrey,
+  },
+});

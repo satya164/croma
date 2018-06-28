@@ -7,20 +7,6 @@ import FloatingActionButton from './FloatingActionButton';
 import * as Colors from '../constants/Colors';
 import type { NavigationProp, ColorListParams } from '../types/Navigation';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  list: {
-    flex: 1,
-    backgroundColor: Colors.lightGrey,
-  },
-  content: {
-    paddingVertical: 4,
-    paddingBottom: 88,
-  },
-});
-
 type Props = {
   navigation: NavigationProp<ColorListParams>,
   palette: string,
@@ -100,3 +86,17 @@ export default class ColorList extends React.Component<Props, State> {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  list: {
+    flex: 1,
+    backgroundColor: Colors.lightGrey,
+  },
+  content: {
+    paddingVertical: 4,
+    paddingBottom: 88,
+  },
+});

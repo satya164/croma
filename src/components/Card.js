@@ -4,14 +4,6 @@ import * as React from 'react';
 import { StyleSheet, Animated } from 'react-native';
 import * as Colors from '../constants/Colors';
 
-const styles = StyleSheet.create({
-  inner: {
-    backgroundColor: Colors.white,
-    marginVertical: 4,
-    elevation: 1,
-  },
-});
-
 type Props = {
   style?: any,
   children: React.Node,
@@ -26,3 +18,11 @@ export default class Card extends React.Component<Props> {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  inner: {
+    backgroundColor: Colors.white,
+    marginVertical: 4,
+    elevation: 1,
+  },
+});

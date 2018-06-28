@@ -6,21 +6,6 @@ import Card from './Card';
 import CardAction from './CardAction';
 import * as Colors from '../constants/Colors';
 
-const styles = StyleSheet.create({
-  color: {
-    height: 100,
-  },
-  bottom: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  label: {
-    flex: 1,
-    marginHorizontal: 16,
-    color: Colors.darkGrey,
-  },
-});
-
 type Props = {
   color: {
     color: string,
@@ -55,3 +40,18 @@ export default class ColorCard extends React.Component<Props> {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  color: {
+    height: 100,
+  },
+  bottom: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  label: {
+    flex: 1,
+    marginHorizontal: 16,
+    color: Colors.darkGrey,
+  },
+});

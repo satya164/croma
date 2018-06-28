@@ -5,6 +5,22 @@ import { StyleSheet, TouchableHighlight, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Colors from '../constants/Colors';
 
+type Props = {
+  icon: string,
+};
+
+export default class FloatingActionButton extends React.Component<Props> {
+  render() {
+    return (
+      <TouchableHighlight {...this.props} style={styles.container}>
+        <View style={styles.fab}>
+          <Icon name={this.props.icon} style={styles.icon} size={24} />
+        </View>
+      </TouchableHighlight>
+    );
+  }
+}
+
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
@@ -26,19 +42,3 @@ const styles = StyleSheet.create({
     color: Colors.fadedBlack,
   },
 });
-
-type Props = {
-  icon: string,
-};
-
-export default class FloatingActionButton extends React.Component<Props> {
-  render() {
-    return (
-      <TouchableHighlight {...this.props} style={styles.container}>
-        <View style={styles.fab}>
-          <Icon name={this.props.icon} style={styles.icon} size={24} />
-        </View>
-      </TouchableHighlight>
-    );
-  }
-}

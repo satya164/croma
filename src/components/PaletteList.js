@@ -7,20 +7,6 @@ import FloatingActionButton from './FloatingActionButton';
 import * as Colors from '../constants/Colors';
 import type { NavigationProp, PaletteListParams } from '../types/Navigation';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  list: {
-    flex: 1,
-    backgroundColor: Colors.lightGrey,
-  },
-  content: {
-    paddingVertical: 4,
-    paddingBottom: 88,
-  },
-});
-
 type Palette = {
   id: number,
   name: string,
@@ -95,3 +81,17 @@ export default class PaletteList extends React.Component<Props, State> {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  list: {
+    flex: 1,
+    backgroundColor: Colors.lightGrey,
+  },
+  content: {
+    paddingVertical: 4,
+    paddingBottom: 88,
+  },
+});
