@@ -5,11 +5,6 @@ import type { Palette } from '../types/Palette';
 
 export default (currentState: Palette[] = [], action: Action): Palette[] => {
   switch (action.type) {
-    case 'LOAD_SAVED_DATA_SUCCESS':
-      if (action.payload && action.payload.palettes) {
-        return action.payload.palettes;
-      }
-      return currentState;
     case 'ADD_PALETTE':
       if (
         action.payload &&

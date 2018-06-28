@@ -1,30 +1,5 @@
 /* @flow */
 
-import type { Palette } from './Palette';
-
-type LoadSavedDataRequest = {|
-  type: 'LOAD_SAVED_DATA_REQUEST',
-|};
-
-type LoadSavedDataSuccess = {|
-  type: 'LOAD_SAVED_DATA_SUCCESS',
-  payload: {|
-    palettes?: Palette[],
-  |},
-|};
-
-type LoadSavedDataError = {|
-  type: 'LOAD_SAVED_DATA_ERROR',
-|};
-
-type SaveDataSuccess = {|
-  type: 'SAVE_DATA_SUCCESS',
-|};
-
-type SaveDataError = {|
-  type: 'SAVE_DATA_ERROR',
-|};
-
 type ShowAddPalette = {|
   type: 'SHOW_ADD_PALETTE',
 |};
@@ -48,13 +23,14 @@ type AddPalette = {|
 
 type AddPaletteError = {|
   type: 'ADD_PALETTE_ERROR',
-  payload: {|
-    id: string,
-  |},
+  error: string,
 |};
 
 type EditPalette = {|
   type: 'EDIT_PALETTE',
+  payload: {|
+    id: string,
+  |},
 |};
 
 type DeletePalette = {|
@@ -85,11 +61,6 @@ type DeleteColor = {|
 |};
 
 export type Action =
-  | LoadSavedDataRequest
-  | LoadSavedDataSuccess
-  | LoadSavedDataError
-  | SaveDataSuccess
-  | SaveDataError
   | ShowAddPalette
   | ShowAddColor
   | AddPalette

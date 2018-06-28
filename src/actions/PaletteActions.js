@@ -1,12 +1,29 @@
 /* @flow */
 
 import uuid from 'uuid';
+import ImageChooser from '../modules/ImageChooser';
+import ColorExtractor from '../modules/ColorExtractor';
 
 import type { Action } from '../types/Action';
+import type { Dispatch } from '../types/Store';
 
-export function showAddPalette(): Action {
-  return {
-    type: 'SHOW_ADD_PALETTE',
+export function showAddPalette() {
+  return async (dispatch: Dispatch) => {
+    dispatch({ type: 'SHOW_ADD_PALETTE' });
+
+    try {
+      const data = await ImageChooser.pickImageWithCamera();
+      /* $FlowFixMe */
+      const colors = await ColorExtractor.extractColors(data.uri, 6);
+
+      if (data && data.name && colors) {
+        dispatch(addPalette(data.name, colors));
+      } else {
+        dispatch({ type: 'ADD_PALETTE_ERROR' });
+      }
+    } catch (e) {
+      dispatch({ type: 'ADD_PALETTE_ERROR', message: e.message });
+    }
   };
 }
 
