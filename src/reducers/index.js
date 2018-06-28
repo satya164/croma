@@ -4,9 +4,11 @@ import { combineReducers } from 'redux';
 import loading from './loading';
 import palettes from './palettes';
 
-const rootReducer = combineReducers({
+const reducers = {
   loading,
   palettes,
-});
+};
 
-export default rootReducer;
+export type Reducers = typeof reducers;
+
+export default combineReducers(reducers);

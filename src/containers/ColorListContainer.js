@@ -1,10 +1,12 @@
 /* @flow */
 
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import ColorList from '../components/ColorList';
 import { showAddColor, deleteColor } from '../actions/PaletteActions';
+import type { State } from '../types/State';
 
-function getColors(palettes, id) {
+const getColors = (palettes, id) => {
   const palette = palettes.find(p => p.id === id);
 
   if (palette && palette.colors) {
@@ -12,20 +14,20 @@ function getColors(palettes, id) {
   } else {
     return [];
   }
-}
+};
 
-function mapStateToProps(state, ownProps) {
-  return {
-    colors: getColors(state.palettes, ownProps.navigation.state.params.id),
-  };
-}
+const mapStateToProps = (state: State, ownProps: *) => ({
+  colors: getColors(state.palettes, ownProps.navigation.state.params.id),
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    deleteColor: (palette, color) => dispatch(deleteColor(palette, color)),
-    showAddColor: palette => dispatch(showAddColor(palette)),
-  };
-}
+const mapDispatchToProps = (dispatch: *) =>
+  bindActionCreators(
+    {
+      deleteColor,
+      showAddColor,
+    },
+    dispatch
+  );
 
 export default connect(
   mapStateToProps,

@@ -1,37 +1,16 @@
 /* @flow */
 
-import {
-  LOAD_SAVED_DATA,
-  ADD_PALETTE,
-  DELETE_PALETTE,
-  DELETE_COLOR,
-} from '../constants/ActionTypes';
+import type { Action } from '../types/Action';
+import type { Palette } from '../types/Palette';
 
-type Palette = {
-  id: number,
-  colors: Array<{
-    color: string,
-  }>,
-};
-
-type Action = {
-  type: string,
-  payload?: any,
-};
-
-type PaletteState = Array<Palette>;
-
-export default (
-  currentState: PaletteState = [],
-  action: Action
-): PaletteState => {
+export default (currentState: Palette[] = [], action: Action): Palette[] => {
   switch (action.type) {
-    case LOAD_SAVED_DATA:
+    case 'LOAD_SAVED_DATA_SUCCESS':
       if (action.payload && action.payload.palettes) {
         return action.payload.palettes;
       }
       return currentState;
-    case ADD_PALETTE:
+    case 'ADD_PALETTE':
       if (
         action.payload &&
         action.payload.id &&
@@ -53,13 +32,13 @@ export default (
         ].concat(currentState);
       }
       return currentState;
-    case DELETE_PALETTE:
+    case 'DELETE_PALETTE':
       if (action.payload && action.payload.id) {
         const { id } = action.payload;
         return currentState.filter(palette => palette.id !== id);
       }
       return currentState;
-    case DELETE_COLOR:
+    case 'DELETE_COLOR':
       if (action.payload) {
         const { palette, color } = action.payload;
         if (palette && color) {

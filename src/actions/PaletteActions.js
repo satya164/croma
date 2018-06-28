@@ -2,29 +2,19 @@
 
 import uuid from 'uuid';
 
-import {
-  SHOW_ADD_PALETTE,
-  SHOW_ADD_COLOR,
-  ADD_PALETTE,
-  DELETE_PALETTE,
-  DELETE_COLOR,
-} from '../constants/ActionTypes';
-
-type Action = {
-  type: string,
-};
+import type { Action } from '../types/Action';
 
 export function showAddPalette(): Action {
   return {
-    type: SHOW_ADD_PALETTE,
+    type: 'SHOW_ADD_PALETTE',
   };
 }
 
 export function addPalette(name: string, colors: Array<string>): Action {
   return {
-    type: ADD_PALETTE,
+    type: 'ADD_PALETTE',
     payload: {
-      id: uuid.v1(),
+      id: uuid.v4(),
       name,
       colors,
       createTime: Date.now(),
@@ -32,27 +22,27 @@ export function addPalette(name: string, colors: Array<string>): Action {
   };
 }
 
-export function deletePalette(id: number): Action {
+export function deletePalette(id: string): Action {
   return {
-    type: DELETE_PALETTE,
+    type: 'DELETE_PALETTE',
     payload: {
       id,
     },
   };
 }
 
-export function showAddColor(palette: number): Action {
+export function showAddColor(palette: string): Action {
   return {
-    type: SHOW_ADD_COLOR,
+    type: 'SHOW_ADD_COLOR',
     payload: {
       palette,
     },
   };
 }
 
-export function deleteColor(palette: number, color: string): Action {
+export function deleteColor(palette: string, color: string): Action {
   return {
-    type: DELETE_COLOR,
+    type: 'DELETE_COLOR',
     payload: {
       palette,
       color,

@@ -1,20 +1,22 @@
 /* @flow */
 
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import App from '../components/App';
 import { loadSavedData } from '../actions/AppActions';
+import type { State } from '../types/State';
 
-function mapStateToProps(state) {
-  return {
-    loading: state.loading,
-  };
-}
+const mapStateToProps = (state: State) => ({
+  loading: state.loading,
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    loadSavedData: () => dispatch(loadSavedData()),
-  };
-}
+const mapDispatchToProps = (dispatch: *) =>
+  bindActionCreators(
+    {
+      loadSavedData,
+    },
+    dispatch
+  );
 
 export default connect(
   mapStateToProps,

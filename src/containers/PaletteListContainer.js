@@ -1,21 +1,23 @@
 /* @flow */
 
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PaletteList from '../components/PaletteList';
 import { showAddPalette, deletePalette } from '../actions/PaletteActions';
+import type { State } from '../types/State';
 
-function mapStateToProps(state) {
-  return {
-    palettes: state.palettes,
-  };
-}
+const mapStateToProps = (state: State) => ({
+  palettes: state.palettes,
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    deletePalette: id => dispatch(deletePalette(id)),
-    showAddPalette: () => dispatch(showAddPalette()),
-  };
-}
+const mapDispatchToProps = (dispatch: *) =>
+  bindActionCreators(
+    {
+      deletePalette,
+      showAddPalette,
+    },
+    dispatch
+  );
 
 export default connect(
   mapStateToProps,

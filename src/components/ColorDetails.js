@@ -8,12 +8,10 @@ import {
   ScrollView,
   TouchableNativeFeedback,
   Clipboard,
-  StatusBar,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import Color from 'pigment/full';
-import { white, black, grey, darkGrey } from '../constants/Colors';
-import type { NavigationProp, ColorDetailsParams } from '../types';
+import { white, grey, darkGrey } from '../constants/Colors';
+import type { NavigationProp, ColorDetailsParams } from '../types/Navigation';
 
 const styles = StyleSheet.create({
   container: {
@@ -25,14 +23,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: 'rgba(0, 0, 0, .04)',
-  },
-  back: {
-    margin: 16,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    margin: 16,
   },
   info: {
     flexDirection: 'row',

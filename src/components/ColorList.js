@@ -5,7 +5,7 @@ import { View, ListView, StyleSheet } from 'react-native';
 import ColorCard from './ColorCard';
 import FloatingActionButton from './FloatingActionButton';
 import * as Colors from '../constants/Colors';
-import type { NavigationProp, ColorListParams } from '../types';
+import type { NavigationProp, ColorListParams } from '../types/Navigation';
 
 const styles = StyleSheet.create({
   container: {
