@@ -1,15 +1,29 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
+import { createStackNavigator } from 'react-navigation';
+import PaletteListContainer from '../containers/PaletteListContainer';
+import ColorListContainer from '../containers/ColorListContainer';
+import ColorDetailsContainer from '../containers/ColorDetailsContainer';
 import Splash from './Splash';
-import NavigationRootContainer from '../containers/NavigationRootContainer';
+
+const Root = createStackNavigator(
+  {
+    PaletteList: { screen: PaletteListContainer },
+    ColorList: { screen: ColorListContainer },
+    ColorDetails: { screen: ColorDetailsContainer },
+  },
+  {
+    initialRouteName: 'PaletteList',
+  }
+);
 
 type Props = {
-  loading: boolean;
-  loadSavedData: Function;
-}
+  loading: boolean,
+  loadSavedData: Function,
+};
 
-export default class App extends Component<void, Props, void> {
+export default class App extends React.Component<Props> {
   componentDidMount() {
     this.props.loadSavedData();
   }
@@ -19,6 +33,6 @@ export default class App extends Component<void, Props, void> {
       return <Splash />;
     }
 
-    return <NavigationRootContainer />;
+    return <Root />;
   }
 }

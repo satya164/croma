@@ -3,8 +3,8 @@
 import { LOAD_SAVED_DATA_REQUEST } from '../constants/ActionTypes';
 
 type Action = {
-  type: string
-}
+  type: string,
+};
 
 export function loadSavedData(): Action {
   return {

@@ -1,14 +1,11 @@
 /* @flow */
 
-import React, { Component } from 'react';
-import {
-  View,
-  ListView,
-  StyleSheet,
-} from 'react-native';
+import * as React from 'react';
+import { View, ListView, StyleSheet } from 'react-native';
 import PaletteCard from './PaletteCard';
 import FloatingActionButton from './FloatingActionButton';
 import * as Colors from '../constants/Colors';
+import type { NavigationProp, PaletteListParams } from '../types';
 
 const styles = StyleSheet.create({
   container: {
@@ -25,41 +22,50 @@ const styles = StyleSheet.create({
 });
 
 type Palette = {
-  id: number;
-  name: string;
-  colors: Array<Object>
-}
+  id: number,
+  name: string,
+  colors: Array<Object>,
+};
 
 type Props = {
-  palettes: Array<Palette>;
-  goToPalette: Function;
-  deletePalette: Function;
-  showAddPalette: Function;
-}
+  navigation: NavigationProp<PaletteListParams>,
+  palettes: Array<Palette>,
+  deletePalette: (id: number) => mixed,
+  showAddPalette: () => mixed,
+};
 
 type State = {
-  dataSource: ListView.DataSource
-}
+  dataSource: ListView.DataSource,
+};
 
-export default class PaletteList extends Component<void, Props, State> {
-  state: State = {
-    dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
+export default class PaletteList extends React.Component<Props, State> {
+  static navigationOptions = {
+    title: 'Palettes',
   };
 
-  componentWillMount() {
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(this.props.palettes),
-    });
+  static getDerivedStateFromProps(props: Props, state: State) {
+    return {
+      dataSource: state.dataSource.cloneWithRows(props.palettes),
+    };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(nextProps.palettes),
+  constructor(props: Props) {
+    super(props);
+
+    const dataSource = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2,
     });
+
+    this.state = {
+      dataSource: dataSource.cloneWithRows(this.props.palettes),
+    };
   }
 
   _handlePress = (palette: Palette) => {
-    this.props.goToPalette(palette.id, palette.name);
+    this.props.navigation.push('ColorList', {
+      id: palette.id,
+      name: palette.name,
+    });
   };
 
   _renderRow = (palette: Palette) => {
@@ -84,7 +90,7 @@ export default class PaletteList extends Component<void, Props, State> {
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
         />
-        <FloatingActionButton icon='add' onPress={this.props.showAddPalette} />
+        <FloatingActionButton icon="add" onPress={this.props.showAddPalette} />
       </View>
     );
   }

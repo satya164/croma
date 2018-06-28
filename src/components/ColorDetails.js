@@ -1,18 +1,19 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import {
-    StyleSheet,
-    Text,
-    View,
-    ScrollView,
-    TouchableNativeFeedback,
-    Clipboard,
-    StatusBar,
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TouchableNativeFeedback,
+  Clipboard,
+  StatusBar,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Color from 'pigment/full';
 import { white, black, grey, darkGrey } from '../constants/Colors';
+import type { NavigationProp, ColorDetailsParams } from '../types';
 
 const styles = StyleSheet.create({
   container: {
@@ -61,15 +62,22 @@ const styles = StyleSheet.create({
 });
 
 type Props = {
-  color: string;
-  goBack: Function;
-}
+  navigation: NavigationProp<ColorDetailsParams>,
+};
 
 type State = {
-  copied: boolean
-}
+  copied: boolean,
+};
 
-export default class ColorDetails extends Component<void, Props, State> {
+export default class ColorDetails extends React.Component<Props, State> {
+  static navigationOptions = ({
+    navigation,
+  }: {
+    navigation: NavigationProp<ColorDetailsParams>,
+  }) => ({
+    title: navigation.state.params.color.toUpperCase(),
+  });
+
   state: State = {
     copied: false,
   };
@@ -87,7 +95,7 @@ export default class ColorDetails extends Component<void, Props, State> {
       { key: 'Luminance', value: (c.luminance() * 100).toFixed(2) + '%' },
       { key: 'Darkness', value: (c.darkness() * 100).toFixed(2) + '%' },
     ];
-  }
+  };
 
   _copyToClipboard = async (text: string) => {
     await Clipboard.setString(text);
@@ -98,49 +106,38 @@ export default class ColorDetails extends Component<void, Props, State> {
       clearTimeout(this._copyTimeout);
     }
 
-    this._copyTimeout = setTimeout(() => this.setState({ copied: false }), 1500);
+    this._copyTimeout = setTimeout(
+      () => this.setState({ copied: false }),
+      1500
+    );
   };
 
   render() {
-    const c = new Color(this.props.color);
+    const c = new Color(this.props.navigation.state.params.color);
     const hex = c.tohex();
-    const name = c.toname();
-    const isDark = c.darkness() > 0.4;
 
     return (
       <View style={styles.container}>
         <ScrollView>
-          <StatusBar backgroundColor={c.mix('black', 0.2).tohex()} />
-          <View style={[ styles.color, { backgroundColor: hex } ]}>
-            <TouchableNativeFeedback onPress={this.props.goBack}>
-              <View>
-                <Icon
-                  name='arrow-back'
-                  size={24}
-                  style={[ isDark ? { color: white } : { color: black, opacity: 0.7 }, styles.back ]}
-                />
+          <View style={[styles.color, { backgroundColor: hex }]} />
+          {this._getItems(c).map(item => (
+            <TouchableNativeFeedback
+              key={item.key}
+              onPress={() => this._copyToClipboard(item.value)}
+            >
+              <View style={styles.info}>
+                <Text style={styles.key}>{item.key} </Text>
+                <Text style={styles.value}>{item.value}</Text>
               </View>
             </TouchableNativeFeedback>
-            <Text style={[ styles.title, isDark ? { color: white } : { color: black, opacity: 0.7 } ]}>
-              {name ? `${name.charAt(0).toUpperCase() + name.substr(1).toLowerCase()} (${hex.toUpperCase()})` : hex.toUpperCase()}
-            </Text>
-          </View>
-          {this._getItems(c).map(item =>
-            <TouchableNativeFeedback key={item.key} onPress={() => this._copyToClipboard(item.value)}>
-                <View style={styles.info}>
-                    <Text style={styles.key}>{item.key} </Text>
-                    <Text style={styles.value}>{item.value}</Text>
-                </View>
-            </TouchableNativeFeedback>
-          )}
+          ))}
         </ScrollView>
 
-        {this.state.copied ?
+        {this.state.copied ? (
           <View style={styles.snackbar}>
             <Text style={styles.hint}>Copied to clipboard!</Text>
-          </View> :
-          null
-        }
+          </View>
+        ) : null}
       </View>
     );
   }

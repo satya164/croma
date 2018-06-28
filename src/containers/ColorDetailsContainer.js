@@ -2,15 +2,12 @@
 
 import { connect } from 'react-redux';
 import ColorDetails from '../components/ColorDetails';
-import { pop } from '../actions/NavigationActions';
 
-function mapDispatchToProps(dispatch) {
-  return {
-    goBack: () => dispatch(pop()),
-  };
+function mapDispatchToProps() {
+  return {};
 }
 
 export default connect(
   null,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(ColorDetails);

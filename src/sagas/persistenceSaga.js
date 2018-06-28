@@ -18,10 +18,11 @@ import {
   DELETE_PALETTE,
   DELETE_COLOR,
 } from '../constants/ActionTypes';
+import data from '../data.json';
 
 const PERSISTENCE_KEY = 'app_state_data_v1';
 
-function *saveDataToStorage() {
+function* saveDataToStorage() {
   try {
     const currentState = yield select();
     if (currentState) {
@@ -36,7 +37,7 @@ function *saveDataToStorage() {
   }
 }
 
-function *loadDataFromStorage() {
+function* loadDataFromStorage() {
   try {
     const savedString = yield AsyncStorage.getItem(PERSISTENCE_KEY);
     if (savedString) {
@@ -46,14 +47,14 @@ function *loadDataFromStorage() {
         payload,
       });
     } else {
-      yield put({ type: LOAD_SAVED_DATA_FAILED });
+      yield put({ type: LOAD_SAVED_DATA, payload: data });
     }
   } catch (e) {
     yield put({ type: LOAD_SAVED_DATA_FAILED, message: e.message });
   }
 }
 
-function *saveDataSaga() {
+function* saveDataSaga() {
   yield* takeLatest(
     [
       PUSH_ROUTE,
@@ -69,13 +70,14 @@ function *saveDataSaga() {
   );
 }
 
-function *loadDataSaga() {
+function* loadDataSaga() {
   yield* takeLatest(LOAD_SAVED_DATA_REQUEST, loadDataFromStorage);
 }
 
-export default function *persistenceSaga(): Generator<Array<Generator<any, any, any>>, void, void> {
-  yield [
-    saveDataSaga(),
-    loadDataSaga(),
-  ];
+export default function* persistenceSaga(): Generator<
+  Array<Generator<any, any, any>>,
+  void,
+  void
+> {
+  yield [saveDataSaga(), loadDataSaga()];
 }

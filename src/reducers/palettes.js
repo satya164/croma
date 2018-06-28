@@ -8,71 +8,73 @@ import {
 } from '../constants/ActionTypes';
 
 type Palette = {
-  id: number;
+  id: number,
   colors: Array<{
-    color: string;
-  }>;
-}
+    color: string,
+  }>,
+};
 
 type Action = {
-  type: string;
-  payload?: any;
-}
+  type: string,
+  payload?: any,
+};
 
-type PaletteState = Array<Palette>
+type PaletteState = Array<Palette>;
 
-export default (currentState : PaletteState = [], action: Action): PaletteState => {
+export default (
+  currentState: PaletteState = [],
+  action: Action
+): PaletteState => {
   switch (action.type) {
-  case LOAD_SAVED_DATA:
-    if (action.payload && action.payload.palettes) {
-      return action.payload.palettes;
-    }
-    return currentState;
-  case ADD_PALETTE:
-    if (action.payload && action.payload.id && action.payload.name && action.payload.colors) {
-      const {
-        id,
-        name,
-        createTime,
-        colors,
-      } = action.payload;
-      let i = createTime;
-      return [ {
-        id,
-        createTime,
-        name,
-        colors: colors.map(c => ({
-          color: c,
-          createTime: i++,
-        })),
-      } ].concat(currentState);
-    }
-    return currentState;
-  case DELETE_PALETTE:
-    if (action.payload && action.payload.id) {
-      const { id } = action.payload;
-      return currentState.filter(palette => palette.id !== id);
-    }
-    return currentState;
-  case DELETE_COLOR:
-    if (action.payload) {
-      const {
-        palette,
-        color,
-      } = action.payload;
-      if (palette && color) {
-        return currentState.map(p => {
-          if (p.id === palette) {
-            const colors = p.colors.filter(c => c.color !== color);
-            return { ...p, colors };
-          }
-
-          return p;
-        });
+    case LOAD_SAVED_DATA:
+      if (action.payload && action.payload.palettes) {
+        return action.payload.palettes;
       }
-    }
-    return currentState;
-  default:
-    return currentState;
+      return currentState;
+    case ADD_PALETTE:
+      if (
+        action.payload &&
+        action.payload.id &&
+        action.payload.name &&
+        action.payload.colors
+      ) {
+        const { id, name, createTime, colors } = action.payload;
+        let i = createTime;
+        return [
+          {
+            id,
+            createTime,
+            name,
+            colors: colors.map(c => ({
+              color: c,
+              createTime: i++,
+            })),
+          },
+        ].concat(currentState);
+      }
+      return currentState;
+    case DELETE_PALETTE:
+      if (action.payload && action.payload.id) {
+        const { id } = action.payload;
+        return currentState.filter(palette => palette.id !== id);
+      }
+      return currentState;
+    case DELETE_COLOR:
+      if (action.payload) {
+        const { palette, color } = action.payload;
+        if (palette && color) {
+          return currentState.map(p => {
+            if (p.id === palette) {
+              const colors = p.colors.filter(c => c.color !== color);
+              return { ...p, colors };
+            }
+
+            return p;
+          });
+        }
+      }
+      return currentState;
+    default:
+      return currentState;
   }
 };

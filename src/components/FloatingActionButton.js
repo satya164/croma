@@ -1,11 +1,7 @@
 /* @flow */
 
-import React, { Component } from 'react';
-import {
-  StyleSheet,
-  TouchableHighlight,
-  View,
-} from 'react-native';
+import * as React from 'react';
+import { StyleSheet, TouchableHighlight, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Colors from '../constants/Colors';
 
@@ -32,19 +28,15 @@ const styles = StyleSheet.create({
 });
 
 type Props = {
-  icon: string;
-}
+  icon: string,
+};
 
-export default class FloatingActionButton extends Component<void, Props, void> {
+export default class FloatingActionButton extends React.Component<Props> {
   render() {
     return (
       <TouchableHighlight {...this.props} style={styles.container}>
         <View style={styles.fab}>
-          <Icon
-            name={this.props.icon}
-            style={styles.icon}
-            size={24}
-          />
+          <Icon name={this.props.icon} style={styles.icon} size={24} />
         </View>
       </TouchableHighlight>
     );

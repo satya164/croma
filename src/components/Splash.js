@@ -1,10 +1,7 @@
 /* @flow */
 
-import React, { Component } from 'react';
-import {
-  StyleSheet,
-  View,
-} from 'react-native';
+import * as React from 'react';
+import { StyleSheet, View } from 'react-native';
 import { primary } from '../constants/Colors';
 
 const styles = StyleSheet.create({
@@ -14,7 +11,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Splash extends Component<void, any, void> {
+export default class Splash extends React.Component<*> {
   render() {
     return <View style={styles.container} />;
   }

@@ -11,8 +11,8 @@ import {
 } from '../constants/ActionTypes';
 
 type Action = {
-  type: string
-}
+  type: string,
+};
 
 export function showAddPalette(): Action {
   return {

@@ -3,12 +3,12 @@
 import { PUSH_ROUTE, POP_ROUTE } from '../constants/ActionTypes';
 
 type Action = {
-  type: string
-}
+  type: string,
+};
 
 type Route = {
-  key: string
-}
+  key: string,
+};
 
 export function push(route: Route): Action {
   return {

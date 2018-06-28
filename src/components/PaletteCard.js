@@ -1,12 +1,7 @@
 /* @flow */
 
-import React, { Component } from 'react';
-import {
-    StyleSheet,
-    TouchableNativeFeedback,
-    View,
-    Text,
-} from 'react-native';
+import * as React from 'react';
+import { StyleSheet, TouchableNativeFeedback, View, Text } from 'react-native';
 import Card from './Card';
 import CardAction from './CardAction';
 import * as Colors from '../constants/Colors';
@@ -33,23 +28,21 @@ const styles = StyleSheet.create({
 
 type Props = {
   palette: {
-    id: number;
-    name: string;
-    colors: Array<Object>;
-  };
-  deletePalette: Function;
-  onPress: Function;
-}
+    id: number,
+    name: string,
+    colors: Array<Object>,
+  },
+  deletePalette: Function,
+  onPress: Function,
+};
 
-export default class PaletteCard extends Component<void, Props, void> {
+export default class PaletteCard extends React.Component<Props> {
   _handleDelete = () => {
     this.props.deletePalette(this.props.palette.id);
   };
 
   render() {
-    const {
-      palette,
-    } = this.props;
+    const { palette } = this.props;
 
     return (
       <Card {...this.props}>
@@ -58,15 +51,15 @@ export default class PaletteCard extends Component<void, Props, void> {
             <View style={styles.palette}>
               {palette.colors.map(item => (
                 <View
-                  style={[ styles.color, { backgroundColor: item.color } ]}
+                  style={[styles.color, { backgroundColor: item.color }]}
                   key={item.color}
                 />
               ))}
             </View>
             <View style={styles.bottom}>
               <Text style={styles.label}>{this.props.palette.name}</Text>
-              <CardAction name='create' />
-              <CardAction name='delete' onPress={this._handleDelete}/>
+              <CardAction name="create" />
+              <CardAction name="delete" onPress={this._handleDelete} />
             </View>
           </View>
         </TouchableNativeFeedback>

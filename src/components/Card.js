@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import { StyleSheet, Animated } from 'react-native';
 import * as Colors from '../constants/Colors';
 
@@ -13,15 +13,15 @@ const styles = StyleSheet.create({
 });
 
 type Props = {
-  style?: any;
-  children?: React.Element;
-}
+  style?: any,
+  children: React.Node,
+};
 
-export default class Card extends Component<void, Props, void> {
+export default class Card extends React.Component<Props> {
   render() {
     return (
-      <Animated.View {...this.props} style={[ styles.inner, this.props.style ]}>
-          {this.props.children}
+      <Animated.View {...this.props} style={[styles.inner, this.props.style]}>
+        {this.props.children}
       </Animated.View>
     );
   }

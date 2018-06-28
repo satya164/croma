@@ -6,15 +6,15 @@ import {
 } from '../constants/ActionTypes';
 
 type Action = {
-  type: string
-}
+  type: string,
+};
 
-export default (currentState : boolean = true, action: Action): boolean => {
+export default (currentState: boolean = true, action: Action): boolean => {
   switch (action.type) {
-  case LOAD_SAVED_DATA:
-  case LOAD_SAVED_DATA_FAILED:
-    return false;
-  default:
-    return currentState;
+    case LOAD_SAVED_DATA:
+    case LOAD_SAVED_DATA_FAILED:
+      return false;
+    default:
+      return currentState;
   }
 };

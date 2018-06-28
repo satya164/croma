@@ -5,12 +5,9 @@ import { put } from 'redux-saga/effects';
 import { addPalette } from '../actions/PaletteActions';
 import ImageChooser from '../modules/ImageChooser';
 import ColorExtractor from '../modules/ColorExtractor';
-import {
-  SHOW_ADD_PALETTE,
-  ADD_PALETTE_FAILED,
-} from '../constants/ActionTypes';
+import { SHOW_ADD_PALETTE, ADD_PALETTE_FAILED } from '../constants/ActionTypes';
 
-function *showAddPalette() {
+function* showAddPalette() {
   try {
     const data = yield ImageChooser.pickImageWithCamera();
     /* $FlowFixMe */
@@ -26,6 +23,6 @@ function *showAddPalette() {
   }
 }
 
-export default function *addPaletteSaga(): Generator<void, void, void> {
+export default function* addPaletteSaga(): Generator<void, void, void> {
   yield* takeEvery(SHOW_ADD_PALETTE, showAddPalette);
 }
