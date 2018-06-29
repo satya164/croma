@@ -10,6 +10,7 @@ import {
   Clipboard,
 } from 'react-native';
 import Color from 'pigment/full';
+import Header from './Header';
 import { white, grey, darkGrey } from '../constants/Colors';
 import type { NavigationProp, ColorDetailsParams } from '../types/Navigation';
 
@@ -22,14 +23,6 @@ type State = {
 };
 
 export default class ColorDetails extends React.Component<Props, State> {
-  static navigationOptions = ({
-    navigation,
-  }: {
-    navigation: NavigationProp<ColorDetailsParams>,
-  }) => ({
-    title: navigation.state.params.color.toUpperCase(),
-  });
-
   state: State = {
     copied: false,
   };
@@ -67,9 +60,14 @@ export default class ColorDetails extends React.Component<Props, State> {
   render() {
     const c = new Color(this.props.navigation.state.params.color);
     const hex = c.tohex();
+    const { navigation } = this.props;
 
     return (
       <View style={styles.container}>
+        <Header
+          title={navigation.state.params.color.toUpperCase()}
+          onBackPress={() => navigation.goBack()}
+        />
         <ScrollView>
           <View style={[styles.color, { backgroundColor: hex }]} />
           {this._getItems(c).map(item => (

@@ -15,6 +15,7 @@ export default createStackNavigator(
   {
     initialRouteName: 'PaletteList',
     navigationOptions: {
+      header: null,
       headerStyle:
         Platform.OS === 'android'
           ? {

@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { View, ListView, StyleSheet } from 'react-native';
 import ColorCard from './ColorCard';
+import Header from './Header';
 import FloatingActionButton from './FloatingActionButton';
 import * as Colors from '../constants/Colors';
 import type { NavigationProp, ColorListParams } from '../types/Navigation';
@@ -22,14 +23,6 @@ type State = {
 };
 
 export default class ColorList extends React.Component<Props, State> {
-  static navigationOptions = ({
-    navigation,
-  }: {
-    navigation: NavigationProp<ColorListParams>,
-  }) => ({
-    title: navigation.state.params.name,
-  });
-
   static getDerivedStateFromProps(props: Props, state: State) {
     return {
       dataSource: state.dataSource.cloneWithRows(props.colors),
@@ -72,8 +65,14 @@ export default class ColorList extends React.Component<Props, State> {
   };
 
   render() {
+    const { navigation } = this.props;
+
     return (
       <View style={styles.container}>
+        <Header
+          title={navigation.state.params.name}
+          onBackPress={() => navigation.goBack()}
+        />
         <ListView
           {...this.props}
           style={styles.list}

@@ -4,6 +4,7 @@ import * as React from 'react';
 import { View, ListView, StyleSheet } from 'react-native';
 import PaletteCard from './PaletteCard';
 import FloatingActionButton from './FloatingActionButton';
+import Header from './Header';
 import * as Colors from '../constants/Colors';
 import type { Palette } from '../types/Palette';
 import type { NavigationProp, PaletteListParams } from '../types/Navigation';
@@ -20,10 +21,6 @@ type State = {
 };
 
 export default class PaletteList extends React.Component<Props, State> {
-  static navigationOptions = {
-    title: 'Palettes',
-  };
-
   static getDerivedStateFromProps(props: Props, state: State) {
     return {
       dataSource: state.dataSource.cloneWithRows(props.palettes),
@@ -61,8 +58,11 @@ export default class PaletteList extends React.Component<Props, State> {
   };
 
   render() {
+    const { navigation, showAddPalette } = this.props;
+
     return (
       <View style={styles.container}>
+        <Header title="Pallets" navigation={navigation} />
         <ListView
           {...this.props}
           style={styles.list}
@@ -71,7 +71,7 @@ export default class PaletteList extends React.Component<Props, State> {
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
         />
-        <FloatingActionButton icon="add" onPress={this.props.showAddPalette} />
+        <FloatingActionButton icon="add" onPress={showAddPalette} />
       </View>
     );
   }
