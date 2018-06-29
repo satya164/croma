@@ -1,5 +1,6 @@
 /* @flow strict */
 
+import { Platform, StatusBar } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import PaletteListContainer from '../containers/PaletteListContainer';
 import ColorListContainer from '../containers/ColorListContainer';
@@ -13,5 +14,14 @@ export default createStackNavigator(
   },
   {
     initialRouteName: 'PaletteList',
+    navigationOptions: {
+      headerStyle:
+        Platform.OS === 'android'
+          ? {
+              paddingTop: StatusBar.currentHeight,
+              height: StatusBar.currentHeight + 56,
+            }
+          : null,
+    },
   }
 );
