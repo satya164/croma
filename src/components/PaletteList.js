@@ -1,7 +1,7 @@
 /* @flow strict */
 
 import * as React from 'react';
-import { View, ListView, StyleSheet } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
 import PaletteCard from './PaletteCard';
 import FloatingActionButton from './FloatingActionButton';
 import Header from './Header';
@@ -16,29 +16,7 @@ type Props = {
   showAddPalette: () => mixed,
 };
 
-type State = {
-  dataSource: ListView.DataSource,
-};
-
-export default class PaletteList extends React.Component<Props, State> {
-  static getDerivedStateFromProps(props: Props, state: State) {
-    return {
-      dataSource: state.dataSource.cloneWithRows(props.palettes),
-    };
-  }
-
-  constructor(props: Props) {
-    super(props);
-
-    const dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    });
-
-    this.state = {
-      dataSource: dataSource.cloneWithRows(this.props.palettes),
-    };
-  }
-
+export default class PaletteList extends React.Component<Props> {
   _handlePress = (palette: Palette) => {
     this.props.navigation.push('ColorList', {
       id: palette.id,
@@ -46,16 +24,17 @@ export default class PaletteList extends React.Component<Props, State> {
     });
   };
 
-  _renderRow = (palette: Palette) => {
+  _renderRow = ({ item }: { item: Palette }) => {
     return (
       <PaletteCard
-        key={palette.id}
-        palette={palette}
+        palette={item}
         deletePalette={this.props.deletePalette}
-        onPress={() => this._handlePress(palette)}
+        onPress={() => this._handlePress(item)}
       />
     );
   };
+
+  _keyExtractor = item => item.id;
 
   render() {
     const { navigation, showAddPalette } = this.props;
@@ -63,13 +42,13 @@ export default class PaletteList extends React.Component<Props, State> {
     return (
       <View style={styles.container}>
         <Header title="Pallets" navigation={navigation} />
-        <ListView
+        <FlatList
           {...this.props}
           style={styles.list}
-          enableEmptySections={false}
           contentContainerStyle={styles.content}
-          dataSource={this.state.dataSource}
-          renderRow={this._renderRow}
+          data={this.props.palettes}
+          renderItem={this._renderRow}
+          keyExtractor={this._keyExtractor}
         />
         <FloatingActionButton icon="add" onPress={showAddPalette} />
       </View>
